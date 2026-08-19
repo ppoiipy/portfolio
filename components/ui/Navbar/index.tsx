@@ -15,7 +15,7 @@ export function Navbar() {
 
   return (
     <nav className="border-b border-gray-800 px-6 py-4">
-      <nav className="flex items-center justify-between border-b border-gray-800 px-6 py-4">
+      <nav className=" flex items-center justify-between">
         <Link href="/" className="text-sm font-medium text-white">
           Natthakorn
         </Link>
