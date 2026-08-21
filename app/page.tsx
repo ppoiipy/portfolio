@@ -12,7 +12,7 @@ export default function Home() {
         <h1 className="text-4xl font-semibold text-white sm:text-5xl">
           I build real software.
           <br />
-          Not claims about it.
+          and this site shows exactly how.
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-gray-400">
           Every project here is real and running — including this site,
