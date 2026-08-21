@@ -1,0 +1,31 @@
+---
+title: "Why My Button Doesn't Support asChild (Yet)"
+date: "2026-08-21"
+description: "A small architecture decision, and why I chose the boring fix over the clever one."
+---
+
+I wrote `<Button asChild><Link href="/projects">View projects</Link></Button>` before I'd actually built `asChild` support into my Button component. It compiled fine. It just didn't do anything — the prop got silently passed through as an unknown HTML attribute, and what would've rendered was a `<button>` wrapping an `<a>`, which is invalid HTML.
+
+`asChild` is a real pattern — Radix UI popularized it — where a component renders its own styles onto whatever child you give it, instead of wrapping that child in its own DOM element. It's genuinely useful. I just didn't have it built yet.
+
+Two ways to fix it:
+
+1. Install `@radix-ui/react-slot`, wire up real `asChild` support.
+2. Skip it — style the two links directly, matching Button's look without going through Button at all.
+
+I went with option 2.
+
+```tsx
+<Link
+  href="/projects"
+  className="inline-flex h-10 items-center justify-center rounded-md bg-white px-4 text-sm font-medium text-black transition-colors hover:bg-gray-200"
+>
+  View projects
+</Link>
+```
+
+Not elegant. Some of those classes are copy-pasted straight out of `buttonVariants`. But I had exactly two places that needed this, and adding a new dependency plus a `Slot`-aware rewrite of Button for two links felt like solving a problem I didn't have yet.
+
+The actual rule I'm using: copy-paste once, maybe twice, is fine. The third time the same styling needs to exist somewhere new, that's the real signal to go back and build the general version. Not before.
+
+It's a small decision. But it's the kind of small decision that either quietly turns into unnecessary abstraction, or quietly turns into copy-pasted mess everywhere — and the only way to tell which one you're doing is to actually notice you're making the choice.
