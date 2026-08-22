@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { getAllArticles } from "@/lib/articles";
 
+export const metadata = {
+  title: "Articles",
+};
 
 export default function ArticlesPage() {
   const articles = getAllArticles();

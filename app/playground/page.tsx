@@ -1,5 +1,9 @@
 import { Playground } from "@/components/features/Playground"
 
+export const metadata = {
+  title: "Playground",
+};
+
 export default function PlaygroundPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-20">

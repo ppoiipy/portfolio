@@ -2,6 +2,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/Badge";
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) => {
+  const { slug } = await params;
+  const project = projects[slug as Slug];
+  if (!project) return {};
+  return {
+    title: project.title,
+    description: project.problem,
+  };
+};
+
 const projects = {
   "this-portfolio": {
     title: "This portfolio",

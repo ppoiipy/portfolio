@@ -3,6 +3,21 @@ import { MDXRemote } from "next-mdx-remote/rsc"
 import { getAllArticles, getArticleSource } from "@/lib/articles"
 import Link from "next/link"
 
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) => {
+  const { slug } = await params
+  const articles = getAllArticles()
+  const meta = articles.find((article) => article.slug === slug)
+  if (!meta) return {};
+  return {
+    title: meta.title,
+    description: meta.description,
+  }
+}
+
 export default async function ArticleDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const articles = getAllArticles()

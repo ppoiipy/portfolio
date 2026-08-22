@@ -1,5 +1,9 @@
 import { ProjectCard } from "@/components/ui/ProjectCard";
 
+export const metadata = {
+  title: "Projects",
+};
+
 export default function ProjectsPage() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-20">
